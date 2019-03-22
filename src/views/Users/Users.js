@@ -1,27 +1,31 @@
-import React, { Component } from 'react';
-import './Users.css';
+import React, { Component } from "react";
+import "./Users.css";
 
 import { connect } from "react-redux";
 
 class Users extends Component {
-
-    constructor(props) {
+  /*constructor(props) {
         super(props);
-    }
+    }*/
 
-    render() {
-        console.dir(this)
-        return (
-            <div>
-                <p>Users!.</p>
-                <p>{(this.props.state.authorization.authentication) ? this.props.state.authorization.authentication.token : ''}</p>
-            </div>
-        );
-    }
-};
+  render() {
+    console.dir(this);
+    return (
+      <div>
+        <p>Users!.</p>
+        <p>
+          {this.props.state.authorization
+            ? this.props.state.authorization.token
+            : ""}
+        </p>
+      </div>
+    );
+  }
+}
 
+//Get Redux's Store State
 const mapStateToProps = state => {
-    return { state };
+  return { state };
 };
 
 //export default Users;
