@@ -3,36 +3,39 @@ import "./Statistics.css";
 
 import { connect } from "react-redux";
 import { addAuthorization } from "../../services/session/actions";
-import { HttpClient } from "../../services/api";
+//import { Subscribe } from "unstated";
+import HttpClient from "../../services/api";
 
 class Statistics extends Component {
+  httpClient = new HttpClient({
+    usePrivateClient: false
+  });
+
   constructor(props) {
     super(props);
 
     this.state = {
-      httpClient: new HttpClient(),
-      users: [],
-      mappedUsers: []
+      posts: []
     };
 
-    this.getUsers();
+    this.getPosts();
   }
 
-  getUsers() {
-    this.state.httpClient.get("users").then(
+  getPosts() {
+    this.httpClient.get("posts").then(
       response => {
-        console.log(response);
         this.setState({
-          users: response.data,
-          mappedUsers: response.data.map(user => {
-            return <p key={user.id}>{user.name}</p>;
-          })
+          posts: response.data
         });
       },
       error => {
         console.error(error);
       }
     );
+  }
+
+  showAlert() {
+    alert("Test alert!.");
   }
 
   render() {
@@ -44,9 +47,20 @@ class Statistics extends Component {
             this.props.addAuthorization({ token: e.target.value });
           }}
         />
-        {this.state.mappedUsers}
+        <button onClick={this.showAlert.bind(this)}>Test</button>
+        {this.state.posts.map(post => {
+          return <p key={post.id}>{post.title}</p>;
+        })}
       </div>
     );
+    //<Subscribe to={} -> Set Subscription to HttpClient with created instance
+    /*
+    <Subscribe to={[this.httpInstance]}>
+        {httpClient => (
+          
+        )}
+      </Subscribe>
+    */
   }
 }
 
