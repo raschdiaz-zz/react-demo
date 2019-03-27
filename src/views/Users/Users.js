@@ -15,16 +15,16 @@ class Users extends Component {
 
     this.state = {
       users: []
-    }
+    };
 
     this.getUsers();
   }
 
   getUsers() {
-    this.httpClient.get("users").then((response)=> {
+    this.httpClient.get("users").then(response => {
       this.setState({
         users: response.data
-      })
+      });
     });
   }
 
@@ -33,6 +33,11 @@ class Users extends Component {
     return (
       <div>
         <p>Users!.</p>
+        <p>
+          {this.props.state.authorization
+            ? this.props.state.authorization.token
+            : ""}
+        </p>
         {this.state.users.map(user => {
           return <p key={user.id}>{user.name}</p>;
         })}

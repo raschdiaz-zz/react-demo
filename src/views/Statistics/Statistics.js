@@ -3,7 +3,7 @@ import "./Statistics.css";
 
 import { connect } from "react-redux";
 import { addAuthorization } from "../../services/session/actions";
-//import { Subscribe } from "unstated";
+
 import HttpClient from "../../services/api";
 
 class Statistics extends Component {
@@ -53,14 +53,6 @@ class Statistics extends Component {
         })}
       </div>
     );
-    //<Subscribe to={} -> Set Subscription to HttpClient with created instance
-    /*
-    <Subscribe to={[this.httpInstance]}>
-        {httpClient => (
-          
-        )}
-      </Subscribe>
-    */
   }
 }
 

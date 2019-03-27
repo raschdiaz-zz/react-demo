@@ -1,17 +1,23 @@
 import React, { Component } from "react";
 //import logo from './logo.svg';
 //import './App.css';
-import Dashboard from "./views/Dashboard/Dashboard";
-//mport LoadingBar from "react-redux-loading-bar";
+
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+import Routes, { ChildRoutes, NoMatch } from "../src/services/router/index";
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <Dashboard />
-      </div>
+      <Router>
+        <div>
+          {Routes.map((route, i) => (
+            <ChildRoutes key={i} {...route} />
+          ))}
+          <Route component={NoMatch} />
+        </div>
+      </Router>
     );
-    //<LoadingBar />
   }
 }
 
