@@ -9,7 +9,7 @@ class HttpClient extends Container {
   client = {};
 
   constructor(props) {
-    console.log("HttpClient Container!");
+    //console.log("HttpClient Container!");
     super(props);
 
     //Replace state with incomming props
@@ -28,24 +28,22 @@ class HttpClient extends Container {
     //  Request Interceptor
     client.interceptors.request.use(
       function(config) {
-        console.log("Request Interceptor Config");
-        console.dir(config);
         return config;
       },
       function(error) {
-        console.error("Request Interceptor Error");
+        //console.error("Request Interceptor Error");
         return Promise.reject(error);
       }
     );
     //  Response Interceptor
     client.interceptors.response.use(
       function(response) {
-        console.log("Response Interceptor Config");
-        console.dir(response);
+        //console.log("Response Interceptor Config");
+        //console.dir(response);
         return response;
       },
       function(error) {
-        console.error("Response Interceptor Error");
+        //console.error("Response Interceptor Error");
         return Promise.reject(error);
       }
     );
@@ -86,7 +84,6 @@ class HttpClient extends Container {
     };
     return this.client.delete(url, config);
   }
-
 }
 
 export default HttpClient;

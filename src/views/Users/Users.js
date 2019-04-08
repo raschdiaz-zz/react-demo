@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import "./Users.css";
 
-import { connect } from "react-redux";
-
 import HttpClient from "../../services/api";
+
+import { connect } from "react-redux";
+import {
+  mapStateToProps,
+  mapDispatchToProps
+} from "../../services/session/store";
 
 class Users extends Component {
   httpClient = new HttpClient({
@@ -12,7 +16,7 @@ class Users extends Component {
 
   constructor(props) {
     super(props);
-
+    console.dir(this.props)
     this.state = {
       users: []
     };
@@ -29,13 +33,18 @@ class Users extends Component {
   }
 
   render() {
-    console.dir(this);
     return (
       <div>
         <p>Users!.</p>
+        <button onClick={this.props.showLoadingBar.bind(this)}>
+          Show LoadingBar
+        </button>
+        <button onClick={this.props.hideLoadingBar.bind(this)}>
+          Hide LoadingBar
+        </button>
         <p>
-          {this.props.state.authorization
-            ? this.props.state.authorization.token
+          {this.props.authorization
+            ? this.props.authorization.token
             : ""}
         </p>
         {this.state.users.map(user => {
@@ -46,10 +55,10 @@ class Users extends Component {
   }
 }
 
-//Get Redux's Store State
-const mapStateToProps = state => {
-  return { state };
-};
-
 //export default Users;
-export default connect(mapStateToProps)(Users);
+var UsersComponent = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Users);
+
+export default UsersComponent;

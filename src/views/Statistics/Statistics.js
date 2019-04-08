@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import "./Statistics.css";
 
-import { connect } from "react-redux";
-import { addAuthorization } from "../../services/session/actions";
-
 import HttpClient from "../../services/api";
 
+import { connect } from "react-redux";
+import {
+  mapStateToProps,
+  mapDispatchToProps
+} from "../../services/session/store";
+
 class Statistics extends Component {
-  httpClient = new HttpClient({
-    usePrivateClient: false
-  });
+  httpClient = new HttpClient();
 
   constructor(props) {
     super(props);
@@ -17,21 +18,16 @@ class Statistics extends Component {
     this.state = {
       posts: []
     };
-
+    console.dir(this.props);
     this.getPosts();
   }
 
   getPosts() {
-    this.httpClient.get("posts").then(
-      response => {
-        this.setState({
-          posts: response.data
-        });
-      },
-      error => {
-        console.error(error);
-      }
-    );
+    this.httpClient.get("posts").then(response => {
+      this.setState({
+        posts: response.data
+      });
+    });
   }
 
   showAlert() {
@@ -57,8 +53,10 @@ class Statistics extends Component {
 }
 
 //export default Statistics;
-//Connect view with redux and link actions
-export default connect(
-  null,
-  { addAuthorization }
+
+var StatisticsComponent = connect(
+  mapStateToProps,
+  mapDispatchToProps
 )(Statistics);
+
+export default StatisticsComponent;

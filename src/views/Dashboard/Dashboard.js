@@ -11,7 +11,7 @@ class Dashboard extends Component {
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="navbar-brand">
             <img
-              src="favicon.ico"
+              src="../favicon.ico"
               width="30"
               height="30"
               className="d-inline-block align-top"
